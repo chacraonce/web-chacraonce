@@ -34,8 +34,9 @@ components/
   ui/                 botones, íconos, cards, formulario, WhatsApp flotante
 content/site.ts       TODOS los textos, links e imágenes
 public/
-  img/                imágenes de las secciones
+  img/                imágenes de las secciones (WebP)
   img/lapuente/       imágenes provisorias del proyecto Lapuente
+  img/chacraonce/     imágenes del proyecto Casa unifamiliar
   ACCA-PLP-ATP-2UN-R06-260925.pdf
   __forms.html        formulario oculto para que Netlify detecte "contacto"
   favicon.*           favicon adaptable (claro/oscuro)
@@ -47,23 +48,18 @@ Todo el texto, los links (WhatsApp, email, Instagram) y las rutas de imágenes e
 
 ### Reemplazar las imágenes de Lapuente
 
-1. Copiá las imágenes definitivas en `public/img/lapuente/` (JPG de hasta 2560 px de lado; Next.js las optimiza solo).
+1. Copiá las imágenes definitivas en `public/img/lapuente/`. Usá WebP de hasta 2560 px de ancho para que el repo no pese de más (un JPG también funciona; Next.js las optimiza solo al servirlas).
 2. En `content/site.ts`, dentro de `lapuente.imagenes`, cambiá `src` y `alt`. La **primera** es la imagen grande; las siguientes cuatro son las miniaturas.
 
 ### Reemplazar el PDF de Lapuente
 
 Reemplazá `public/ACCA-PLP-ATP-2UN-R06-260925.pdf`. Si el archivo nuevo tiene otro nombre, actualizá `pdf` en `content/site.ts`.
 
-### Fotos del equipo
-
-Los círculos de las cards del equipo muestran un ícono de persona mientras no haya foto.
-1. Copiá las fotos en `public/img/equipo/` (cuadradas, mínimo 200×200 px).
-2. En `content/site.ts`, en cada persona de `equipo.personas`, cambiá `foto: null` por
-   `foto: { src: "/img/equipo/rodolfo.jpg", alt: "Rodolfo Couñago" }`.
-
 ### Carrusel de proyectos
 
-La card de Lapuente está duplicada para probar el carrusel (`proyectos.lista` en `content/site.ts`). Para agregar un proyecto real, creá otro objeto como `lapuente` y sumalo a la lista; para dejar uno solo, borrá el duplicado (las flechas y los indicadores se ocultan solos).
+`proyectos.lista` en `content/site.ts` tiene Lapuente y Casa unifamiliar, en ese orden. Para agregar un proyecto, creá otro objeto como `lapuente` y sumalo a la lista; con uno solo, las flechas y los indicadores se ocultan solos. El carrusel no da la vuelta: las flechas se atenúan en la primera y en la última card.
+
+El campo opcional `estado` (por ejemplo `"En construcción"`) muestra una etiqueta sobre la imagen principal del proyecto.
 
 ## Deploy en Netlify
 

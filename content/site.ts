@@ -28,7 +28,7 @@ export const inicio = {
   botonPrincipal: { label: "Empezar mi proyecto", href: "#contacto" },
   botonSecundario: { label: "Ver proyectos", href: "#proyectos" },
   imagen: {
-    src: "/img/hero.jpg",
+    src: "/img/hero.webp",
     alt: "Fachada de una casa contemporánea en blanco y negro con ventanales y jardín",
   },
 };
@@ -41,7 +41,7 @@ export const proposito = {
     "Esa vivencia se transformó en un propósito claro: que cada cliente viva la construcción como una experiencia confiable y positiva, donde cada decisión se tome con transparencia y sentido común.",
   ],
   imagen: {
-    src: "/img/proposito.jpg",
+    src: "/img/proposito.webp",
     alt: "Vista lateral de una casa de hormigón blanco con un árbol al frente",
   },
 };
@@ -86,7 +86,7 @@ export const equipo: {
     },
   ],
   banda: {
-    src: "/img/banda.jpg",
+    src: "/img/banda.webp",
     alt: "Casa de una planta iluminada al atardecer, con una persona caminando frente a la fachada",
   },
 };
@@ -109,7 +109,7 @@ export const porQueElegirnos = {
     },
   ],
   imagen: {
-    src: "/img/por-que.jpg",
+    src: "/img/por-que.webp",
     alt: "Cocina contemporánea con isla, lámparas colgantes y banquetas",
   },
 };
@@ -170,7 +170,7 @@ export const queHacemos = {
     },
   ],
   imagen: {
-    src: "/img/que-hacemos.jpg",
+    src: "/img/que-hacemos.webp",
     alt: "Casa blanca de dos niveles entre árboles, en blanco y negro",
   },
 };
@@ -194,11 +194,11 @@ const lapuente: Proyecto = {
   descripcion:
     "Dos viviendas dúplex en régimen de propiedad horizontal sobre un padrón de 15 × 50 m.",
   imagenes: [
-    { src: "/img/lapuente/R04-IMG-04.jpg", alt: "Patio de acceso de Lapuente con vegetación y fachada de dos niveles" },
-    { src: "/img/lapuente/R04-IMG-02.jpg", alt: "Fondo de la vivienda con barbacoa techada y ventanales al estar" },
-    { src: "/img/lapuente/R04-IMG-06.jpg", alt: "Cocina con isla de madera y ventanales al patio" },
-    { src: "/img/lapuente/R06-IMG-05.jpg", alt: "Estar comedor integrado con la cocina" },
-    { src: "/img/lapuente/R04-IMG-07.jpg", alt: "Estar con escalera y patio interior verde" },
+    { src: "/img/lapuente/R04-IMG-04.webp", alt: "Patio de acceso de Lapuente con vegetación y fachada de dos niveles" },
+    { src: "/img/lapuente/R04-IMG-02.webp", alt: "Fondo de la vivienda con barbacoa techada y ventanales al estar" },
+    { src: "/img/lapuente/R04-IMG-06.webp", alt: "Cocina con isla de madera y ventanales al patio" },
+    { src: "/img/lapuente/R06-IMG-05.webp", alt: "Estar comedor integrado con la cocina" },
+    { src: "/img/lapuente/R04-IMG-07.webp", alt: "Estar con escalera y patio interior verde" },
   ],
   ficha: [
     { label: "Unidades", valor: "2 Dúplex" },
@@ -218,11 +218,11 @@ const casaUnifamiliar: Proyecto = {
   descripcion:
     "Vivienda unifamiliar de una planta, con grandes ventanales al jardín y estar, comedor y cocina integrados.",
   imagenes: [
-    { src: "/img/chacraonce/mg_tatu_20251216_323-HDR-Pano-Editar.jpg", alt: "Fachada de la casa de una planta al atardecer, con los ventanales iluminados y el jardín al frente" },
-    { src: "/img/chacraonce/mg_tatu_20251216_099-Editar.jpg", alt: "Frente de la casa con un eucalipto, la entrada revestida en madera y el portón del garaje" },
-    { src: "/img/chacraonce/Cocina.jpg", alt: "Cocina con isla de madera, mesada gris y banquetas" },
-    { src: "/img/chacraonce/mg_tatu_20251216_355.jpg", alt: "Estar con sillón blanco, comedor y cocina integrados, de noche" },
-    { src: "/img/chacraonce/mg_tatu_20251216_151.jpg", alt: "Pasillo con puerta corrediza de madera entre la cocina y el estar" },
+    { src: "/img/chacraonce/mg_tatu_20251216_323-HDR-Pano-Editar.webp", alt: "Fachada de la casa de una planta al atardecer, con los ventanales iluminados y el jardín al frente" },
+    { src: "/img/chacraonce/mg_tatu_20251216_099-Editar.webp", alt: "Frente de la casa con un eucalipto, la entrada revestida en madera y el portón del garaje" },
+    { src: "/img/chacraonce/Cocina.webp", alt: "Cocina con isla de madera, mesada gris y banquetas" },
+    { src: "/img/chacraonce/mg_tatu_20251216_355.webp", alt: "Estar con sillón blanco, comedor y cocina integrados, de noche" },
+    { src: "/img/chacraonce/mg_tatu_20251216_151.webp", alt: "Pasillo con puerta corrediza de madera entre la cocina y el estar" },
   ],
   ficha: [{ label: "Unidades", valor: "1 Vivienda" }, ...lapuente.ficha.slice(1)],
   pdf: lapuente.pdf,
@@ -239,7 +239,7 @@ export const contactoSeccion = {
   titulo: "¿Listo para bajar a tierra tu idea?",
   subtitulo: "Generemos el proyecto que se adapta a tus necesidades y tu presupuesto.",
   imagen: {
-    src: "/img/contacto.jpg",
+    src: "/img/contacto.webp",
     alt: "Frente de una casa con revestimiento de madera y un olivo",
   },
   formulario: {
