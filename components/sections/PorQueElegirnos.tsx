@@ -6,15 +6,16 @@ import { CardCompromiso } from "@/components/ui/CardCompromiso";
 export function PorQueElegirnos() {
   return (
     <section id="diferencial" aria-labelledby="diferencial-titulo" className="seccion flex">
-      {/* Hasta 768: una columna (texto arriba, imagen abajo). Desde 769: texto y cards a la izquierda, imagen a la derecha */}
-      <div className="contenedor grid grid-cols-1 content-center gap-10 py-12 md:py-16 min-[48.0625rem]:grid-cols-[minmax(0,552fr)_minmax(0,576fr)] min-[48.0625rem]:gap-8 lg:gap-10 lg:py-10 xl:grid-cols-[552px_576px] xl:gap-0">
+      {/* Hasta 768: una columna (texto arriba, imagen abajo). Desde 769: texto y cards a la izquierda, imagen a la derecha.
+          Mitades iguales y mismo gap que "Qué hacemos" para que las columnas de las dos secciones queden alineadas */}
+      <div className="contenedor grid grid-cols-1 content-center gap-10 py-12 md:py-16 min-[48.0625rem]:grid-cols-2 min-[48.0625rem]:gap-8 lg:gap-12 lg:py-10 xl:gap-16">
         <div className="flex flex-col gap-10">
           <IntroSeccion
             id="diferencial-titulo"
             chip={porQueElegirnos.chip}
             titulo={porQueElegirnos.titulo}
           />
-          <ul className="flex flex-col gap-[29px] lg:max-w-[478px]">
+          <ul className="flex flex-col gap-[29px]">
             {porQueElegirnos.items.map((it) => (
               <CardCompromiso key={it.titulo} {...it} />
             ))}
@@ -27,7 +28,7 @@ export function PorQueElegirnos() {
             src={porQueElegirnos.imagen.src}
             alt={porQueElegirnos.imagen.alt}
             fill
-            sizes="(min-width: 1280px) 576px, (min-width: 769px) 50vw, 100vw"
+            sizes="(min-width: 1280px) 532px, (min-width: 769px) 50vw, 100vw"
             className="object-cover"
           />
         </div>

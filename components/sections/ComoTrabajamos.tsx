@@ -4,7 +4,8 @@ import { IntroSeccion } from "@/components/ui/IntroSeccion";
 export function ComoTrabajamos() {
   return (
     <section id="como-trabajamos" aria-labelledby="como-trabajamos-titulo" className="seccion flex">
-      <div className="contenedor flex flex-col justify-center py-12 md:py-16 xl:py-12">
+      {/* Abajo lleva menos padding que arriba (32 desde 768) para que la distancia hasta "Nuestro equipo" sea como la del resto de las secciones */}
+      <div className="contenedor flex flex-col justify-center py-12 md:pb-8 md:pt-16 xl:pt-12">
         <IntroSeccion
           id="como-trabajamos-titulo"
           chip={comoTrabajamos.chip}

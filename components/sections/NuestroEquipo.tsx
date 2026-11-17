@@ -1,7 +1,6 @@
 import Image from "next/image";
 import { equipo } from "@/content/site";
 import { IntroSeccion } from "@/components/ui/IntroSeccion";
-import { IconoPersona } from "@/components/ui/Iconos";
 
 export function NuestroEquipo() {
   return (
@@ -16,27 +15,21 @@ export function NuestroEquipo() {
         />
 
         {/* 1 por fila hasta 639, 2 de 640 a 767 (la tercera centrada) y 3 por fila desde 768 */}
-        <ul className="mt-[86px] grid grid-cols-1 gap-x-6 gap-y-[71px] sm:grid-cols-2 md:grid-cols-3 md:gap-x-4 lg:gap-x-6 xl:mt-[81px]">
+        <ul className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 md:gap-x-4 lg:gap-x-6 xl:mt-9">
           {equipo.personas.map((p) => (
             <li
               key={p.nombre}
-              className="relative bg-gris-card px-[30px] pb-8 pt-[73px] sm:max-md:odd:last:col-span-2 sm:max-md:odd:last:w-[calc(50%-12px)] sm:max-md:odd:last:justify-self-center md:px-5 lg:px-[30px] xl:min-h-[292px]"
+              className="bg-gris-card px-[30px] py-8 sm:max-md:odd:last:col-span-2 sm:max-md:odd:last:w-[calc(50%-12px)] sm:max-md:odd:last:justify-self-center md:px-5 lg:px-[30px] xl:min-h-[251px]"
             >
-              <span className="absolute left-1/2 top-0 flex size-[94px] -translate-x-1/2 -translate-y-1/2 items-center justify-center overflow-hidden rounded-full bg-blanco text-negro">
-                {p.foto ? (
-                  <Image src={p.foto.src} alt={p.foto.alt} fill sizes="94px" className="object-cover" />
-                ) : (
-                  <IconoPersona className="size-[66px]" />
-                )}
-              </span>
               <h3 className="text-titulo-card text-blanco">{p.nombre}</h3>
               <p className="mt-1 text-[10px] leading-[18px] text-rol sm:min-h-[36px]">{p.rol}</p>
-              <p className="mt-6 text-p-card text-beige xl:mt-[26px]">{p.descripcion}</p>
+              <p className="mt-3 text-p-card text-beige">{p.descripcion}</p>
             </li>
           ))}
         </ul>
 
-        <div className="relative mt-7 h-[180px] w-full md:h-[200px] xl:h-[218px]">
+        {/* Mismo margen que arriba de las cards (mt-10 / xl:mt-9) para que queden a igual distancia del título y de la foto */}
+        <div className="relative mt-10 h-[180px] xl:mt-9 w-full md:h-[200px] xl:h-[218px]">
           <Image
             src={equipo.banda.src}
             alt={equipo.banda.alt}

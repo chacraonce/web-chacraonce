@@ -8,13 +8,20 @@ import { CardProyecto } from "@/components/ui/CardProyecto";
 import { IconoFlecha } from "@/components/ui/Iconos";
 
 export function NuestrosProyectos() {
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, align: "start" });
+  // Sin loop: el carrusel se frena en la primera y en la última card.
+  const [emblaRef, emblaApi] = useEmblaCarousel({ align: "start" });
   const [actual, setActual] = useState(0);
   const [total, setTotal] = useState(proyectos.lista.length);
+  const [puedeAnterior, setPuedeAnterior] = useState(false);
+  const [puedeSiguiente, setPuedeSiguiente] = useState(proyectos.lista.length > 1);
 
   useEffect(() => {
     if (!emblaApi) return;
-    const onSelect = () => setActual(emblaApi.selectedScrollSnap());
+    const onSelect = () => {
+      setActual(emblaApi.selectedScrollSnap());
+      setPuedeAnterior(emblaApi.canScrollPrev());
+      setPuedeSiguiente(emblaApi.canScrollNext());
+    };
     const onInit = () => {
       setTotal(emblaApi.scrollSnapList().length);
       onSelect();
@@ -48,8 +55,8 @@ export function NuestrosProyectos() {
           <IntroSeccion id="proyectos-titulo" chip={proyectos.chip} titulo={proyectos.titulo} />
           {hayVarios && (
             <div className="hidden shrink-0 gap-3 md:flex lg:hidden">
-              <BotonFlecha direccion="izquierda" onClick={anterior} />
-              <BotonFlecha direccion="derecha" onClick={siguiente} />
+              <BotonFlecha direccion="izquierda" onClick={anterior} disabled={!puedeAnterior} />
+              <BotonFlecha direccion="derecha" onClick={siguiente} disabled={!puedeSiguiente} />
             </div>
           )}
         </div>
@@ -85,11 +92,13 @@ export function NuestrosProyectos() {
               <BotonFlecha
                 direccion="izquierda"
                 onClick={anterior}
+                disabled={!puedeAnterior}
                 className="absolute top-1/2 -translate-y-1/2 bg-negro max-lg:hidden lg:-left-[22px] xl:-left-[60px]"
               />
               <BotonFlecha
                 direccion="derecha"
                 onClick={siguiente}
+                disabled={!puedeSiguiente}
                 className="absolute top-1/2 -translate-y-1/2 bg-negro max-lg:hidden lg:-right-[22px] xl:-right-[60px]"
               />
             </>
@@ -98,7 +107,7 @@ export function NuestrosProyectos() {
 
         {hayVarios && (
           <div className="mt-6 flex items-center justify-between md:justify-center">
-            <BotonFlecha direccion="izquierda" onClick={anterior} className="md:hidden" />
+            <BotonFlecha direccion="izquierda" onClick={anterior} disabled={!puedeAnterior} className="md:hidden" />
             <div className="flex gap-3">
               {Array.from({ length: total }).map((_, i) => (
                 <button
@@ -115,7 +124,7 @@ export function NuestrosProyectos() {
                 </button>
               ))}
             </div>
-            <BotonFlecha direccion="derecha" onClick={siguiente} className="md:hidden" />
+            <BotonFlecha direccion="derecha" onClick={siguiente} disabled={!puedeSiguiente} className="md:hidden" />
           </div>
         )}
       </div>
@@ -126,18 +135,22 @@ export function NuestrosProyectos() {
 function BotonFlecha({
   direccion,
   onClick,
+  disabled = false,
   className = "",
 }: {
   direccion: "izquierda" | "derecha";
   onClick: () => void;
+  disabled?: boolean;
   className?: string;
 }) {
+  // En la primera/última card la flecha queda atenuada y sin hover
   return (
     <button
       type="button"
       onClick={onClick}
+      disabled={disabled}
       aria-label={direccion === "izquierda" ? "Proyecto anterior" : "Proyecto siguiente"}
-      className={`flex size-11 items-center justify-center border border-blanco text-blanco transition-colors hover:border-ocre hover:bg-ocre hover:text-negro ${className}`}
+      className={`flex size-11 items-center justify-center border border-blanco text-blanco transition-[color,background-color,border-color,opacity] hover:border-ocre hover:bg-ocre hover:text-negro disabled:pointer-events-none disabled:opacity-30 ${className}`}
     >
       <IconoFlecha direccion={direccion} className="size-5" />
     </button>

@@ -50,10 +50,6 @@ export type Persona = {
   nombre: string;
   rol: string;
   descripcion: string;
-  // Foto del círculo de la card. Cuando esté, poné por ejemplo:
-  // foto: { src: "/img/equipo/rodolfo.jpg", alt: "Rodolfo Couñago" }
-  // Mientras sea null se muestra el ícono de persona.
-  foto: { src: string; alt: string } | null;
 };
 
 export const equipo: {
@@ -72,21 +68,18 @@ export const equipo: {
   personas: [
     {
       nombre: "Rodolfo Couñago",
-      foto: { src: "/img/equipo/Rodolfo.jpeg", alt: "Rodolfo Couñago" },
       rol: "Ing. Civil — Obras y proyectos civiles",
       descripcion:
         "Más de 15 años dirigiendo obras civiles y montajes industriales. Convierte tu idea en una obra que se sostiene en el tiempo.",
     },
     {
       nombre: "Laura Couñago",
-      foto: null,
       rol: "MBA / Ing. Civil — Control de calidad",
       descripcion:
         "Presupuesta, compra y cuida de que cada peso invertido rinda al máximo, sin desviarse del presupuesto firmado.",
     },
     {
       nombre: "Norbert Both",
-      foto: null,
       rol: "Escribano / Abogado — Estructuras financieras",
       descripcion:
         "Blinda legalmente cada proyecto con estructuras financieras sólidas, para que tu inversión esté protegida en todo momento.",
@@ -186,6 +179,8 @@ export type Proyecto = {
   ubicacion: string;
   nombre: string;
   descripcion: string;
+  // Etiqueta opcional sobre la imagen principal (ej. "En construcción"). Si no está, no se muestra nada.
+  estado?: string;
   // Imágenes provisorias: la primera es la principal, todas aparecen como miniaturas.
   imagenes: { src: string; alt: string }[];
   ficha: { label: string; valor: string }[];
@@ -195,6 +190,7 @@ export type Proyecto = {
 const lapuente: Proyecto = {
   ubicacion: "Montevideo · Anteproyecto 2027",
   nombre: "Lapuente",
+  estado: "En construcción",
   descripcion:
     "Dos viviendas dúplex en régimen de propiedad horizontal sobre un padrón de 15 × 50 m.",
   imagenes: [
@@ -215,12 +211,28 @@ const lapuente: Proyecto = {
   pdf: "/ACCA-PLP-ATP-2UN-R06-260925.pdf",
 };
 
+const casaUnifamiliar: Proyecto = {
+  // PENDIENTE: ficha (salvo Unidades) y PDF todavía son los de Lapuente.
+  ubicacion: "Montevideo",
+  nombre: "Casa unifamiliar",
+  descripcion:
+    "Vivienda unifamiliar de una planta, con grandes ventanales al jardín y estar, comedor y cocina integrados.",
+  imagenes: [
+    { src: "/img/chacraonce/mg_tatu_20251216_323-HDR-Pano-Editar.jpg", alt: "Fachada de la casa de una planta al atardecer, con los ventanales iluminados y el jardín al frente" },
+    { src: "/img/chacraonce/mg_tatu_20251216_099-Editar.jpg", alt: "Frente de la casa con un eucalipto, la entrada revestida en madera y el portón del garaje" },
+    { src: "/img/chacraonce/Cocina.jpg", alt: "Cocina con isla de madera, mesada gris y banquetas" },
+    { src: "/img/chacraonce/mg_tatu_20251216_355.jpg", alt: "Estar con sillón blanco, comedor y cocina integrados, de noche" },
+    { src: "/img/chacraonce/mg_tatu_20251216_151.jpg", alt: "Pasillo con puerta corrediza de madera entre la cocina y el estar" },
+  ],
+  ficha: [{ label: "Unidades", valor: "1 Vivienda" }, ...lapuente.ficha.slice(1)],
+  pdf: lapuente.pdf,
+};
+
 export const proyectos = {
   chip: "Nuestros proyectos",
   titulo: "Obras que hablan por nosotros",
   boton: "Conoce el proyecto",
-  // La card de Lapuente está duplicada para probar el carrusel.
-  lista: [lapuente, lapuente],
+  lista: [lapuente, casaUnifamiliar],
 };
 
 export const contactoSeccion = {

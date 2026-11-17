@@ -26,6 +26,11 @@ export function CardProyecto({ proyecto, boton, prioridad = false }: Props) {
             sizes="(min-width: 1280px) 545px, (min-width: 1024px) 480px, 100vw"
             className="animate-[aparecer_.35s_ease] object-cover"
           />
+          {proyecto.estado && (
+            <span className="absolute left-3 top-3 bg-ocre px-3 py-2 text-[0.8125rem] font-medium uppercase leading-none text-negro md:left-4 md:top-4">
+              {proyecto.estado}
+            </span>
+          )}
         </div>
         <ul className="grid grid-cols-4 gap-[11px]">
           {miniaturas.map((img) => {
