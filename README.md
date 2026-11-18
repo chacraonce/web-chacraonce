@@ -73,9 +73,12 @@ El campo opcional `estado` (por ejemplo `"En construcción"`) muestra una etique
 ## Formulario de contacto (Netlify Forms)
 
 - El formulario se llama `contacto`. Netlify lo detecta en el deploy gracias a `public/__forms.html`.
+- **Activar la detección (una sola vez)**: Netlify → **Forms → Enable form detection**, y después hacé un nuevo deploy. Sin esto Netlify no registra el form y los envíos dan error.
 - Si agregás o cambiás campos en `components/ui/FormularioContacto.tsx`, actualizá también `public/__forms.html` con los mismos `name`.
 - Los envíos se ven en Netlify → **Forms**.
-- **Notificaciones por email**: Netlify → Site configuration → Forms → **Form notifications → Add notification → Email notification**, elegí el form `contacto` y el correo que recibe los mensajes (por ejemplo contacto@chacraonce.com.uy).
+- **Notificaciones por email**: Netlify → **Forms → Submission notifications → Add notification → Email notification**, elegí el form `contacto` y el correo contacto@chacraonce.com.uy. Netlify le manda a esa casilla un correo de confirmación: hasta que alguien toque **Confirm**, no llegan las notificaciones.
+- Los correos llegan desde `formresponses@netlify.com` (conviene revisar spam la primera vez). Como el campo se llama `email`, al tocar "Responder" se le contesta directo a quien escribió.
+- El formulario solo funciona en Netlify (deploy o deploy preview); con `npm run dev` el envío da error.
 - Tiene honeypot anti-spam (`bot-field`). Netlify además filtra spam con Akismet.
 
 ## Comportamiento responsive
