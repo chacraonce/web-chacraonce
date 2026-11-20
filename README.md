@@ -66,8 +66,7 @@ El campo opcional `estado` (por ejemplo `"En construcción"`) muestra una etique
 1. Subí el proyecto a un repositorio de GitHub.
 2. En Netlify: **Add new site → Import an existing project → GitHub** y elegí el repo.
 3. Netlify detecta Next.js solo. La configuración está en `netlify.toml` (build `npm run build`).
-4. **Variables de entorno** (Site configuration → Environment variables):
-   - `NEXT_PUBLIC_GA_ID` = el ID de medición de Google Analytics 4 (`G-XXXXXXX`). Si no está cargada, Analytics no se carga. Después de agregarla, hacé un nuevo deploy.
+4. **Google Analytics 4**: el ID de medición (`G-BTV88Z86MW`, flujo "Web Chacra Once") está en `netlify.toml` como `NEXT_PUBLIC_GA_ID`, solo para producción. Los deploy previews y `npm run dev` no cargan Analytics. Para cambiarlo, editá ese valor y hacé un nuevo deploy.
 5. **Dominio**: Domain management → Add a domain → `chacraonce.com.uy`, y seguí los pasos de DNS que indica Netlify.
 
 ## Formulario de contacto (Netlify Forms)
