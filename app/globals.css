@@ -188,3 +188,84 @@ body.menu-abierto {
     translate: 0 24px;
   }
 }
+
+/* ── Efectos de imágenes ─────────────────────────────────────────────
+   Se aplican al contenedor de la imagen (el div o la sección que tiene el <Image fill> como hijo directo):
+   · data-parallax → la foto se mueve un poco más lento que la página (solo navegadores con
+     scroll-driven animations: Chrome, Edge y Safari 26+; en el resto se ve fija, sin efecto).
+   · data-zoom     → zoom leve al pasar el mouse (solo dispositivos con mouse).
+   Con "reducir movimiento" activado no se aplica ninguno. Las fotos no tienen animación de entrada. */
+@media screen and (prefers-reduced-motion: no-preference) {
+  /* 1. Transición del zoom al pasar el mouse */
+  [data-zoom] > img {
+    transition: scale 1.4s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  /* 2. Parallax */
+  @supports (animation-timeline: view()) {
+    [data-parallax] {
+      view-timeline: --parallax block;
+    }
+    /* La foto es un 16 % más alta que su marco para que al moverse nunca quede un borde vacío */
+    [data-parallax] > img {
+      top: -8% !important;
+      bottom: auto !important;
+      height: 116% !important;
+      animation: parallax linear both;
+      animation-timeline: --parallax;
+      animation-range: cover 0% cover 100%;
+    }
+    /* data-parallax="entrada" (fondo de Contacto): como es la última sección, la página termina antes
+       de que salga de pantalla y el parallax común quedaría cortado. Este se completa mientras la sección
+       entra: la foto baja apenas y se asienta, y queda quieta (sin agrandar) mientras completan el formulario. */
+    [data-parallax="entrada"] > img {
+      animation-name: parallax-entrada;
+      animation-range: entry 0% entry 100%;
+    }
+    /* En pantallas apaisadas la foto de Contacto (vertical, 4:5) tiene mucho alto de sobra: la caja
+       puede ser 50 % más alta que la sección sin agrandar la foto, así que recorre más (~185 px a 1440)
+       sin perder nitidez. En celulares queda el movimiento chico, porque ahí sí habría que agrandarla. */
+    @media (min-width: 769px) and (min-aspect-ratio: 6/5) {
+      [data-parallax="entrada"] > img {
+        top: -25% !important;
+        height: 150% !important;
+        animation-name: parallax-entrada-amplio;
+      }
+    }
+  }
+}
+
+/* 3. Zoom al pasar el mouse */
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  [data-zoom]:hover > img {
+    scale: 1.04;
+  }
+}
+
+@keyframes parallax {
+  from {
+    transform: translateY(-6%);
+  }
+  to {
+    transform: translateY(6%);
+  }
+}
+
+@keyframes parallax-entrada {
+  from {
+    transform: translateY(-6%) scale(1.06);
+  }
+  to {
+    transform: none;
+  }
+}
+
+/* -15 % de una caja de 150 %: arranca ~22 % del alto de la sección más arriba y baja hasta su lugar */
+@keyframes parallax-entrada-amplio {
+  from {
+    transform: translateY(-15%) scale(1.05);
+  }
+  to {
+    transform: none;
+  }
+}
