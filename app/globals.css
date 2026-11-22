@@ -188,3 +188,67 @@ body.menu-abierto {
     translate: 0 24px;
   }
 }
+
+/* ── Efectos de imágenes ─────────────────────────────────────────────
+   Se aplican al contenedor de la imagen (el div o la sección que tiene el <Image fill> como hijo directo):
+   · data-parallax → la foto se mueve un poco más lento que la página (solo navegadores con
+     scroll-driven animations: Chrome, Edge y Safari 26+; en el resto se ve fija, sin efecto).
+   · data-zoom     → zoom leve al pasar el mouse (solo dispositivos con mouse).
+   · data-fondo-fijo → la foto de fondo queda quieta en la pantalla y la sección se desliza encima (Contacto).
+   Con "reducir movimiento" activado no se aplica ninguno. Las fotos no tienen animación de entrada. */
+@media screen and (prefers-reduced-motion: no-preference) {
+  /* 1. Transición del zoom al pasar el mouse */
+  [data-zoom] > img {
+    transition: scale 1.4s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  /* 2. Parallax */
+  @supports (animation-timeline: view()) {
+    [data-parallax] {
+      view-timeline: --parallax block;
+    }
+    /* La foto es un 16 % más alta que su marco para que al moverse nunca quede un borde vacío */
+    [data-parallax] > img {
+      top: -8% !important;
+      bottom: auto !important;
+      height: 116% !important;
+      animation: parallax linear both;
+      animation-timeline: --parallax;
+      animation-range: cover 0% cover 100%;
+    }
+  }
+
+  /* 3. Fondo fijo (Contacto): la foto queda quieta en la pantalla y la sección se desliza encima,
+     como una ventana. La foto es position: fixed del tamaño de la pantalla y el clip-path de la
+     sección la recorta para que solo se vea dentro de ella (overflow no recorta elementos fixed).
+     No usa animaciones ligadas al scroll, así que funciona en todos los navegadores.
+     Ojo: si algún contenedor de la sección tuviera transform, filter o will-change, la foto
+     dejaría de quedar fija a la pantalla. */
+  [data-fondo-fijo] {
+    clip-path: inset(0);
+  }
+  /* !important: next/image pone position, top, bottom y height en línea.
+     100lvh: en celulares no deja un hueco cuando se esconde la barra del navegador */
+  [data-fondo-fijo] > img {
+    position: fixed !important;
+    top: 0 !important;
+    bottom: auto !important;
+    height: 100lvh !important;
+  }
+}
+
+/* 4. Zoom al pasar el mouse */
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  [data-zoom]:hover > img {
+    scale: 1.04;
+  }
+}
+
+@keyframes parallax {
+  from {
+    transform: translateY(-6%);
+  }
+  to {
+    transform: translateY(6%);
+  }
+}

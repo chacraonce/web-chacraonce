@@ -12,7 +12,7 @@ export function QueHacemos() {
       <div className="contenedor grid grid-cols-1 content-center gap-10 py-12 md:py-16 min-[48.0625rem]:grid-cols-2 min-[48.0625rem]:gap-8 lg:gap-12 lg:py-10 xl:gap-16">
         {/* Desde 769 no tiene alto fijo: se estira al alto de la columna de texto
             y con los márgenes negativos sobresale 9px arriba y 12px abajo de la última card */}
-        <div className="relative order-2 h-[60svh] min-h-[320px] md:h-[440px] min-[48.0625rem]:order-none min-[48.0625rem]:-mb-[12px] min-[48.0625rem]:-mt-[9px] min-[48.0625rem]:h-auto min-[48.0625rem]:min-h-0">
+        <div data-zoom className="relative order-2 h-[60svh] min-h-[320px] overflow-hidden md:h-[440px] min-[48.0625rem]:order-none min-[48.0625rem]:-mb-[12px] min-[48.0625rem]:-mt-[9px] min-[48.0625rem]:h-auto min-[48.0625rem]:min-h-0">
           {/* Desde 769 el marco es vertical y la foto apaisada: con object-cover se dibuja a ~770 px de ancho
               aunque la columna mida 532, así que sizes pide 800 para que el navegador no la estire */}
           <Image

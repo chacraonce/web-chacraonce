@@ -4,7 +4,7 @@ import { FormularioContacto } from "@/components/ui/FormularioContacto";
 
 export function Contacto() {
   return (
-    <section id="contacto" aria-labelledby="contacto-titulo" className="seccion relative flex overflow-hidden">
+    <section id="contacto" aria-labelledby="contacto-titulo" data-fondo-fijo className="seccion relative flex overflow-hidden">
       {/* Imagen de fondo a sangre + rectángulo negro al 63 % */}
       <Image
         src={contactoSeccion.imagen.src}

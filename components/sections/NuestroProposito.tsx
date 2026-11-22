@@ -7,7 +7,7 @@ export function NuestroProposito() {
     <section id="nosotros" aria-labelledby="nosotros-titulo" className="seccion flex">
       {/* Hasta 768: una columna (imagen arriba). Desde 769 (48.0625rem): imagen y texto lado a lado */}
       <div className="contenedor grid grid-cols-1 gap-10 py-12 md:py-16 min-[48.0625rem]:grid-cols-[minmax(0,595fr)_minmax(0,456fr)] min-[48.0625rem]:gap-8 min-[48.0625rem]:py-0 lg:gap-12 xl:grid-cols-[595px_456px] xl:gap-[77px]">
-        <div className="relative h-[52svh] min-h-[320px] md:h-[440px] min-[48.0625rem]:h-auto min-[48.0625rem]:min-h-0">
+        <div data-zoom className="relative h-[52svh] min-h-[320px] overflow-hidden md:h-[440px] min-[48.0625rem]:h-auto min-[48.0625rem]:min-h-0">
           <Image
             src={proposito.imagen.src}
             alt={proposito.imagen.alt}

@@ -16,7 +16,7 @@ export function CardProyecto({ proyecto, boton, prioridad = false }: Props) {
     <article className="grid h-full grid-cols-1 gap-8 bg-gris-card p-5 md:p-8 lg:grid-cols-[minmax(0,545fr)_minmax(0,416fr)] lg:gap-10 lg:px-10 lg:py-10 xl:grid-cols-[545px_1fr] xl:gap-[57px] xl:px-[55px] xl:py-[47px]">
       {/* Galería */}
       <div className="flex flex-col gap-[11px]">
-        <div className="relative aspect-[545/374] w-full overflow-hidden">
+        <div data-zoom className="relative aspect-[545/374] w-full overflow-hidden">
           <Image
             key={principal.src}
             src={principal.src}

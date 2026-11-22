@@ -30,7 +30,7 @@ export function NuestroEquipo() {
         </ul>
 
         {/* Mismo margen que arriba de las cards (mt-10 / xl:mt-9) para que queden a igual distancia del título y de la foto */}
-        <div className="relative mt-10 h-[180px] xl:mt-9 w-full md:h-[200px] xl:h-[218px]">
+        <div data-parallax data-zoom className="relative mt-10 h-[180px] w-full overflow-hidden md:h-[200px] xl:mt-9 xl:h-[218px]">
           <Image
             src={equipo.banda.src}
             alt={equipo.banda.alt}

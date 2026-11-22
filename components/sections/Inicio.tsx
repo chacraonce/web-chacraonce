@@ -7,10 +7,12 @@ export function Inicio() {
     <section
       id="inicio"
       aria-labelledby="inicio-titulo"
-      className="seccion relative flex flex-col overflow-hidden md:justify-center"
+      // overflow-clip y no overflow-hidden: "hidden" vuelve a la sección un contenedor de scroll
+      // y el parallax de la foto mediría ese scroll (que nunca cambia) en vez del de la página
+      className="seccion relative flex flex-col overflow-clip md:justify-center"
     >
       {/* Imagen: arriba en mobile, de fondo a sangre desde tablet */}
-      <div className="relative h-[42svh] min-h-[260px] w-full md:absolute md:inset-0 md:h-auto">
+      <div data-parallax className="relative h-[42svh] min-h-[260px] w-full overflow-hidden md:absolute md:inset-0 md:h-auto">
         <Image
           src={inicio.imagen.src}
           alt={inicio.imagen.alt}
