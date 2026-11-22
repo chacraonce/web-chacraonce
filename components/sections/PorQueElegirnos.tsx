@@ -24,11 +24,15 @@ export function PorQueElegirnos() {
         {/* Desde 769 no tiene alto fijo: se estira al alto de la columna de texto
             y con los márgenes negativos sobresale 9px arriba y 12px abajo de la última card */}
         <div className="relative h-[60svh] min-h-[320px] md:h-[440px] min-[48.0625rem]:-mb-[12px] min-[48.0625rem]:-mt-[9px] min-[48.0625rem]:h-auto min-[48.0625rem]:min-h-0">
+          {/* Desde 769 el marco es vertical y la foto apaisada: con object-cover se dibuja a ~860 px de ancho
+              aunque la columna mida 532, así que sizes pide 900 para que el navegador no la estire.
+              quality 90 (habilitada en next.config.ts) porque el original es chico (1193 × 896) */}
           <Image
             src={porQueElegirnos.imagen.src}
             alt={porQueElegirnos.imagen.alt}
             fill
-            sizes="(min-width: 1280px) 532px, (min-width: 769px) 50vw, 100vw"
+            quality={90}
+            sizes="(min-width: 769px) 900px, 100vw"
             className="object-cover"
           />
         </div>

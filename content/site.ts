@@ -190,7 +190,7 @@ export type Proyecto = {
 const lapuente: Proyecto = {
   ubicacion: "Montevideo · Anteproyecto 2027",
   nombre: "Lapuente",
-  estado: "En construcción",
+  estado: "Preventa",
   descripcion:
     "Dos viviendas dúplex en régimen de propiedad horizontal sobre un padrón de 15 × 50 m.",
   imagenes: [
@@ -265,5 +265,88 @@ export const footer = {
     { label: "Proyectos", href: "#proyectos" },
   ],
   derechos: "©2026 Chacra Once. Todos los derechos reservados.",
+  privacidad: { label: "Política de privacidad", href: "/privacidad" },
   desarrollador: { label: "Sacapuntas", href: "https://sacapuntas.com.uy/" },
+};
+
+// Aviso de cookies: aparece abajo hasta que la persona acepta o rechaza.
+export const cookies = {
+  texto:
+    "Usamos cookies de Google Analytics para saber cuántas personas visitan la web y cómo llegan. Solo se activan si las aceptás.",
+  link: { label: "Política de privacidad", href: "/privacidad" },
+  aceptar: "Aceptar",
+  rechazar: "Rechazar",
+};
+
+export type SeccionPrivacidad = {
+  titulo: string;
+  parrafos?: string[];
+  lista?: string[];
+};
+
+// Página /privacidad. El correo de contacto se convierte en link solo.
+// Si cambiás algo importante, actualizá también la fecha.
+export const privacidad: {
+  titulo: string;
+  actualizada: string;
+  intro: string;
+  secciones: SeccionPrivacidad[];
+  preferencias: {
+    titulo: string;
+    texto: string;
+    boton: string;
+    estado: { aceptadas: string; rechazadas: string; sinElegir: string };
+  };
+} = {
+  titulo: "Política de privacidad",
+  actualizada: "20 de noviembre de 2026",
+  intro:
+    "En Chacra Once cuidamos los datos que nos dejás en esta web. Acá te contamos, en simple, qué datos recibimos, para qué los usamos y cómo podés pedirnos que los corrijamos o los borremos.",
+  secciones: [
+    {
+      titulo: "Quién es responsable",
+      parrafos: [
+        `Chacra Once, constructora con base en Montevideo, Uruguay. Por cualquier consulta sobre tus datos, escribinos a ${contacto.email}.`,
+      ],
+    },
+    {
+      titulo: "Formulario de contacto",
+      parrafos: [
+        "Cuando nos escribís por el formulario recibimos tu nombre, tu correo, tu teléfono (si lo dejás) y tu mensaje. Los usamos solo para responderte y, si avanzamos, para acompañar tu proyecto.",
+        "El formulario funciona con Netlify, el servicio donde está alojada esta web, que guarda los mensajes y nos los reenvía por correo. No vendemos tus datos ni los compartimos con nadie para hacer publicidad.",
+      ],
+    },
+    {
+      titulo: "Estadísticas de visitas",
+      parrafos: [
+        "Si aceptás las cookies, usamos Google Analytics para saber cuántas personas visitan la web, desde dónde llegan, qué tipo de dispositivo usan y cuántas nos escriben por el formulario. Son datos estadísticos: no nos dicen quién sos.",
+        "Google Analytics no guarda tu dirección IP, y los datos de cada visita se conservan como máximo 14 meses.",
+        "Si rechazás las cookies, Google Analytics no se carga y la web funciona igual.",
+      ],
+    },
+    {
+      titulo: "Qué cookies usamos",
+      lista: [
+        "_ga y _ga_BTV88Z86MW, de Google Analytics, solo si las aceptás. Sirven para distinguir una visita de otra y duran hasta 2 años.",
+        "Además, tu navegador recuerda si aceptaste o rechazaste las cookies, para no volver a preguntarte.",
+      ],
+    },
+    {
+      titulo: "Tus derechos",
+      parrafos: [
+        `Según la Ley N.º 18.331 de Protección de Datos Personales, podés pedirnos acceder a tus datos, corregirlos, actualizarlos o borrarlos. Escribinos a ${contacto.email} y te respondemos.`,
+        "Si sentís que no atendimos bien tu pedido, podés hacer un reclamo ante la Unidad Reguladora y de Control de Datos Personales (URCDP).",
+      ],
+    },
+  ],
+  preferencias: {
+    titulo: "Cambiar tu elección",
+    texto: "Podés cambiar tu elección cuando quieras. Al tocar el botón vuelve a aparecer el aviso de cookies.",
+    boton: "Cambiar preferencias de cookies",
+    estado: {
+      aceptadas: "Ahora tenés las cookies de Google Analytics aceptadas.",
+      rechazadas: "Ahora tenés las cookies de Google Analytics rechazadas.",
+      sinElegir: "Todavía no elegiste.",
+    },
+  },
 };

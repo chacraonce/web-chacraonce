@@ -4,7 +4,8 @@ import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { navLinks } from "@/content/site";
 
-export function Navbar() {
+/** prefijo: "" en la home (links #seccion); "/" en otras páginas, para volver a la home. */
+export function Navbar({ prefijo = "" }: { prefijo?: string }) {
   const [abierto, setAbierto] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   const botonRef = useRef<HTMLButtonElement>(null);
@@ -53,7 +54,7 @@ export function Navbar() {
   return (
     <header className="fixed inset-x-0 top-0 z-50 h-[var(--navbar-h)] bg-negro">
       <nav aria-label="Principal" className="contenedor flex h-full items-center justify-between">
-        <a href="#inicio" className="relative z-10 block" aria-label="Chacra Once, ir al inicio">
+        <a href={`${prefijo}#inicio`} className="relative z-10 block" aria-label="Chacra Once, ir al inicio">
           <Image
             src="/logo-chacra-once.svg"
             alt=""
@@ -70,14 +71,14 @@ export function Navbar() {
           <ul className="flex items-center gap-[25px]">
             {navLinks.map((l) => (
               <li key={l.href}>
-                <a href={l.href} className="text-navbar text-blanco transition-colors hover:text-ocre">
+                <a href={prefijo + l.href} className="text-navbar text-blanco transition-colors hover:text-ocre">
                   {l.label}
                 </a>
               </li>
             ))}
           </ul>
           <a
-            href="#contacto"
+            href={`${prefijo}#contacto`}
             className="inline-flex h-10 w-[135px] items-center justify-center bg-ocre text-navbar text-negro transition-colors hover:bg-[#cdb596]"
           >
             Contacto
@@ -117,14 +118,14 @@ export function Navbar() {
         <ul className="contenedor flex flex-col gap-2 pt-10">
           {navLinks.map((l) => (
             <li key={l.href}>
-              <a href={l.href} onClick={() => setAbierto(false)} className="block py-3 text-a2 text-blanco">
+              <a href={prefijo + l.href} onClick={() => setAbierto(false)} className="block py-3 text-a2 text-blanco">
                 {l.label}
               </a>
             </li>
           ))}
           <li className="pt-6">
             <a
-              href="#contacto"
+              href={`${prefijo}#contacto`}
               onClick={() => setAbierto(false)}
               className="inline-flex h-[50px] w-full items-center justify-center bg-ocre text-boton text-negro md:w-[255px]"
             >

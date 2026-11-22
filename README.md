@@ -23,16 +23,18 @@ npm run lint     # revisar el código
 
 ```
 app/
-  layout.tsx          fuente, metadata, favicon y Google Analytics
+  layout.tsx          fuente, metadata, favicon y aviso de cookies (que carga Google Analytics)
   page.tsx            une todas las secciones en una sola página
+  privacidad/         página /privacidad (política de privacidad y preferencias de cookies)
   globals.css         tokens de diseño (colores, estilos de texto, contenedor, scroll)
   sitemap.ts, robots.ts
   fonts/              JetBrains Mono variable
 components/
   sections/           Navbar, Inicio, NuestroProposito, NuestroEquipo, PorQueElegirnos,
                       ComoTrabajamos, QueHacemos, NuestrosProyectos, Contacto, Footer
-  ui/                 botones, íconos, cards, formulario, WhatsApp flotante
-content/site.ts       TODOS los textos, links e imágenes
+  ui/                 botones, íconos, cards, formulario, WhatsApp flotante, aviso de cookies
+content/site.ts       TODOS los textos, links e imágenes (también los de cookies y privacidad)
+lib/consentimiento.ts guarda la elección de cookies y manda los eventos a Analytics
 public/
   img/                imágenes de las secciones (WebP)
   img/lapuente/       imágenes provisorias del proyecto Lapuente
@@ -61,13 +63,25 @@ Reemplazá `public/ACCA-PLP-ATP-2UN-R06-260925.pdf`. Si el archivo nuevo tiene o
 
 El campo opcional `estado` (por ejemplo `"En construcción"`) muestra una etiqueta sobre la imagen principal del proyecto.
 
+### Animación de las cards
+
+Las cards aparecen con un fade y una subida corta cuando entran en pantalla; las que entran juntas salen escalonadas. Para animar otro elemento, agregale el atributo `data-revelar` (por ejemplo `<li data-revelar ...>`). La lógica está en `components/ui/RevelarAlScroll.tsx` y la duración, el recorrido y el escalonado en `app/globals.css` (bloque "Aparición de las cards"). Sin JavaScript, con "reducir movimiento" activado en el sistema o al imprimir, las cards se ven siempre, sin animación.
 ## Deploy en Netlify
 
 1. Subí el proyecto a un repositorio de GitHub.
 2. En Netlify: **Add new site → Import an existing project → GitHub** y elegí el repo.
 3. Netlify detecta Next.js solo. La configuración está en `netlify.toml` (build `npm run build`).
-4. **Google Analytics 4**: el ID de medición (`G-BTV88Z86MW`, flujo "Web Chacra Once") está en `netlify.toml` como `NEXT_PUBLIC_GA_ID`, solo para producción. Los deploy previews y `npm run dev` no cargan Analytics. Para cambiarlo, editá ese valor y hacé un nuevo deploy.
+4. **Google Analytics 4**: ver la sección de abajo.
 5. **Dominio**: Domain management → Add a domain → `chacraonce.com.uy`, y seguí los pasos de DNS que indica Netlify.
+
+## Google Analytics y cookies
+
+- El ID de medición (`G-BTV88Z86MW`, flujo "Web Chacra Once") está en `netlify.toml` como `NEXT_PUBLIC_GA_ID`, solo para producción. Los deploy previews y `npm run dev` no cargan Analytics ni muestran el aviso. Para cambiar el ID, editá ese valor (y el nombre de la cookie `_ga_…` en `privacidad`, en `content/site.ts`) y hacé un nuevo deploy.
+- **Aviso de cookies**: Analytics se carga solo si la persona toca **Aceptar**. Si rechaza o no elige, no se carga nada. La elección se puede cambiar desde `/privacidad`.
+- **No pegues el `<script>` de gtag.js que muestra Google**: Analytics ya se carga desde `components/ui/AvisoCookies.tsx`. Si además lo agregás a mano, cada visita se cuenta dos veces.
+- **Contactos por el formulario**: cada envío exitoso manda el evento `generate_lead` (con `form_name: contacto`). Para verlo como conversión: Analytics → **Administrar → Eventos clave → Nuevo evento clave** → `generate_lead`.
+- Analytics solo cuenta a quienes aceptaron las cookies. El total exacto de mensajes está en Netlify → **Forms**.
+- Los textos del aviso y de la política están en `content/site.ts` (`cookies` y `privacidad`). Si cambiás algo importante de la política, actualizá la fecha.
 
 ## Formulario de contacto (Netlify Forms)
 

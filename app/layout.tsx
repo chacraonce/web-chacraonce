@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
-import { GoogleAnalytics } from "@next/third-parties/google";
+import { AvisoCookies } from "@/components/ui/AvisoCookies";
 import { SITE_URL, inicio } from "@/content/site";
 import "./globals.css";
 
@@ -45,13 +45,17 @@ export const viewport: Viewport = {
   themeColor: "#000000",
 };
 
+// Definido en netlify.toml solo para producción. Google Analytics se carga dentro de
+// AvisoCookies y únicamente si la persona acepta las cookies.
 const gaId = process.env.NEXT_PUBLIC_GA_ID;
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="es-UY" className={jetbrains.variable}>
-      <body>{children}</body>
-      {gaId ? <GoogleAnalytics gaId={gaId} /> : null}
+      <body>
+        {children}
+        {gaId ? <AvisoCookies gaId={gaId} /> : null}
+      </body>
     </html>
   );
 }

@@ -19,6 +19,7 @@ export function NuestroEquipo() {
           {equipo.personas.map((p) => (
             <li
               key={p.nombre}
+              data-revelar
               className="bg-gris-card px-[30px] py-8 sm:max-md:odd:last:col-span-2 sm:max-md:odd:last:w-[calc(50%-12px)] sm:max-md:odd:last:justify-self-center md:px-5 lg:px-[30px] xl:min-h-[251px]"
             >
               <h3 className="text-titulo-card text-blanco">{p.nombre}</h3>

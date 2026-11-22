@@ -3,7 +3,8 @@ import type { ReactNode } from "react";
 import { contacto, footer } from "@/content/site";
 import { IconoEmail, IconoInstagram, IconoUbicacion, IconoWhatsapp } from "@/components/ui/Iconos";
 
-export function Footer() {
+/** prefijo: "" en la home (links #seccion); "/" en otras páginas, para volver a la home. */
+export function Footer({ prefijo = "" }: { prefijo?: string }) {
   const datos: { icono: ReactNode; texto: string; href?: string; externo?: boolean }[] = [
     { icono: <IconoWhatsapp className="size-[24px]" />, texto: contacto.telefono, href: contacto.whatsapp, externo: true },
     { icono: <IconoUbicacion className="h-[24px] w-auto" />, texto: contacto.ubicacion },
@@ -24,7 +25,7 @@ export function Footer() {
           <ul className="flex flex-col gap-[13px]">
             {footer.links.map((l) => (
               <li key={l.href}>
-                <a href={l.href} className="text-[16px] font-light leading-6 text-blanco transition-colors hover:text-ocre">
+                <a href={prefijo + l.href} className="text-[16px] font-light leading-6 text-blanco transition-colors hover:text-ocre">
                   {l.label}
                 </a>
               </li>
@@ -62,9 +63,17 @@ export function Footer() {
       </div>
 
       <div className="border-t border-blanco/80">
-        <div className="contenedor flex flex-col gap-2 py-4 text-[13px] font-light text-blanco md:flex-row md:items-center md:justify-between">
-          <p>{footer.derechos}</p>
-          <p>
+        <div className="contenedor flex flex-col gap-2 py-4 text-[13px] font-light text-blanco md:flex-row md:items-center md:justify-between md:gap-6">
+          <div className="flex flex-col gap-2 lg:flex-row lg:gap-6">
+            <p>{footer.derechos}</p>
+            <a
+              href={footer.privacidad.href}
+              className="self-start underline underline-offset-2 transition-colors hover:text-ocre"
+            >
+              {footer.privacidad.label}
+            </a>
+          </div>
+          <p className="shrink-0">
             Desarrollado por{" "}
             <a
               href={footer.desarrollador.href}

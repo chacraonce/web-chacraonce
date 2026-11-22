@@ -61,7 +61,8 @@ export function NuestrosProyectos() {
           )}
         </div>
 
-        <div className="relative mt-8 xl:mt-[43px]">
+        {/* El carrusel aparece como un solo bloque (animar cada slide chocaría con el deslizamiento) */}
+        <div data-revelar className="relative mt-8 xl:mt-[43px]">
           <div
             role="region"
             aria-roledescription="carrusel"
@@ -106,7 +107,7 @@ export function NuestrosProyectos() {
         </div>
 
         {hayVarios && (
-          <div className="mt-6 flex items-center justify-between md:justify-center">
+          <div data-revelar className="mt-6 flex items-center justify-between md:justify-center">
             <BotonFlecha direccion="izquierda" onClick={anterior} disabled={!puedeAnterior} className="md:hidden" />
             <div className="flex gap-3">
               {Array.from({ length: total }).map((_, i) => (

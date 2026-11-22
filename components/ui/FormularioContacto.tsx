@@ -2,6 +2,7 @@
 
 import { useState, type FormEvent } from "react";
 import { contactoSeccion } from "@/content/site";
+import { registrarEvento } from "@/lib/consentimiento";
 
 type Estado = "inicial" | "enviando" | "exito" | "error";
 type Errores = Partial<Record<"nombre" | "email" | "mensaje", string>>;
@@ -44,6 +45,8 @@ export function FormularioContacto() {
         body: new URLSearchParams(datos as unknown as Record<string, string>).toString(),
       });
       if (!res.ok) throw new Error(String(res.status));
+      // Contacto recibido: evento recomendado de GA4 para leads (solo si aceptó las cookies).
+      registrarEvento("generate_lead", { form_name: "contacto" });
       setEstado("exito");
       form.reset();
     } catch {

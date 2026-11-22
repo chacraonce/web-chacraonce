@@ -9,6 +9,7 @@ import { NuestrosProyectos } from "@/components/sections/NuestrosProyectos";
 import { Contacto } from "@/components/sections/Contacto";
 import { Footer } from "@/components/sections/Footer";
 import { WhatsappFlotante } from "@/components/ui/WhatsappFlotante";
+import { RevelarAlScroll } from "@/components/ui/RevelarAlScroll";
 
 export default function Home() {
   return (
@@ -26,6 +27,7 @@ export default function Home() {
       </main>
       <Footer />
       <WhatsappFlotante />
+      <RevelarAlScroll />
     </>
   );
 }
