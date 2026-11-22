@@ -194,6 +194,7 @@ body.menu-abierto {
    · data-parallax → la foto se mueve un poco más lento que la página (solo navegadores con
      scroll-driven animations: Chrome, Edge y Safari 26+; en el resto se ve fija, sin efecto).
    · data-zoom     → zoom leve al pasar el mouse (solo dispositivos con mouse).
+   · data-fondo-fijo → la foto de fondo queda quieta en la pantalla y la sección se desliza encima (Contacto).
    Con "reducir movimiento" activado no se aplica ninguno. Las fotos no tienen animación de entrada. */
 @media screen and (prefers-reduced-motion: no-preference) {
   /* 1. Transición del zoom al pasar el mouse */
@@ -215,27 +216,28 @@ body.menu-abierto {
       animation-timeline: --parallax;
       animation-range: cover 0% cover 100%;
     }
-    /* data-parallax="entrada" (fondo de Contacto): como es la última sección, la página termina antes
-       de que salga de pantalla y el parallax común quedaría cortado. Este se completa mientras la sección
-       entra: la foto baja apenas y se asienta, y queda quieta (sin agrandar) mientras completan el formulario. */
-    [data-parallax="entrada"] > img {
-      animation-name: parallax-entrada;
-      animation-range: entry 0% entry 100%;
-    }
-    /* En pantallas apaisadas la foto de Contacto (vertical, 4:5) tiene mucho alto de sobra: la caja
-       puede ser 50 % más alta que la sección sin agrandar la foto, así que recorre más (~185 px a 1440)
-       sin perder nitidez. En celulares queda el movimiento chico, porque ahí sí habría que agrandarla. */
-    @media (min-width: 769px) and (min-aspect-ratio: 6/5) {
-      [data-parallax="entrada"] > img {
-        top: -25% !important;
-        height: 150% !important;
-        animation-name: parallax-entrada-amplio;
-      }
-    }
+  }
+
+  /* 3. Fondo fijo (Contacto): la foto queda quieta en la pantalla y la sección se desliza encima,
+     como una ventana. La foto es position: fixed del tamaño de la pantalla y el clip-path de la
+     sección la recorta para que solo se vea dentro de ella (overflow no recorta elementos fixed).
+     No usa animaciones ligadas al scroll, así que funciona en todos los navegadores.
+     Ojo: si algún contenedor de la sección tuviera transform, filter o will-change, la foto
+     dejaría de quedar fija a la pantalla. */
+  [data-fondo-fijo] {
+    clip-path: inset(0);
+  }
+  /* !important: next/image pone position, top, bottom y height en línea.
+     100lvh: en celulares no deja un hueco cuando se esconde la barra del navegador */
+  [data-fondo-fijo] > img {
+    position: fixed !important;
+    top: 0 !important;
+    bottom: auto !important;
+    height: 100lvh !important;
   }
 }
 
-/* 3. Zoom al pasar el mouse */
+/* 4. Zoom al pasar el mouse */
 @media (hover: hover) and (prefers-reduced-motion: no-preference) {
   [data-zoom]:hover > img {
     scale: 1.04;
@@ -248,24 +250,5 @@ body.menu-abierto {
   }
   to {
     transform: translateY(6%);
-  }
-}
-
-@keyframes parallax-entrada {
-  from {
-    transform: translateY(-6%) scale(1.06);
-  }
-  to {
-    transform: none;
-  }
-}
-
-/* -15 % de una caja de 150 %: arranca ~22 % del alto de la sección más arriba y baja hasta su lugar */
-@keyframes parallax-entrada-amplio {
-  from {
-    transform: translateY(-15%) scale(1.05);
-  }
-  to {
-    transform: none;
   }
 }
